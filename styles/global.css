@@ -1,0 +1,48 @@
+html {
+  box-sizing: border-box;
+  overflow-x: hidden;
+  width: 100vw;
+  min-height: 100vh;
+  font-size: 16px;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+:root {
+  --base-weak: #E5E5E5;
+  --base-strong: #54617F;
+  --base-strong-up: #3E4453;
+  --accent-strong: #768DC5;
+  --default-shadow: -31px -14px 30px 0px rgba(255, 255, 255, 0.60),
+    15px 25px 40px 0px rgba(0, 0, 0, 0.15);
+  --inset-shadow: -31px -14px 30px 0px rgba(255, 255, 255, 0.60),
+    15px 25px 40px 0px rgba(0, 0, 0, 0.15),
+    5px 13px 15px 0px rgba(0, 0, 0, 0.20) inset;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Redcollar;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  scrollbar-width: thin;
+  width: 100vw;
+  min-height: 100vh;
+  color: var(--base-strong);
+  background-color: var(--base-weak);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.rounded {
+  border-radius: 1.875rem;
+}
