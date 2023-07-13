@@ -1,0 +1,5 @@
+import { DEFAULT_BREAK_INTERVAL, DEFAULT_POMODORO, DEFAULT_LONG_BREAK, DEFAULT_SHORT_BREAK } from "./constants.js";
+import App from "./timer.js";
+
+const app = new App(DEFAULT_POMODORO, DEFAULT_SHORT_BREAK, DEFAULT_LONG_BREAK, DEFAULT_BREAK_INTERVAL);
+window.app = app;
