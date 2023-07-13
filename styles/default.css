@@ -39,5 +39,4 @@ a {
 .filled-btn {
   color: var(--base-weak);
   background-color: var(--accent-strong);
-  box-shadow: none;
 }
