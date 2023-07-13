@@ -40,3 +40,10 @@ a {
   color: var(--base-weak);
   background-color: var(--accent-strong);
 }
+
+.number-input {
+  background-color: transparent;
+  border: none;
+  color: var(--base-weak);
+  padding: 0.5rem;
+}

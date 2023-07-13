@@ -22,6 +22,8 @@ html {
   --inset-shadow: -31px -14px 30px 0px rgba(255, 255, 255, 0.60),
     15px 25px 40px 0px rgba(0, 0, 0, 0.15),
     5px 13px 15px 0px rgba(0, 0, 0, 0.20) inset;
+  --faint-strong: rgba(229, 229, 229, 0.50);
+  --modal-blackout: rgba(0, 0, 0, 0.8);
 }
 
 body {
