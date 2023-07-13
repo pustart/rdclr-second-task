@@ -1,0 +1,76 @@
+.modal-background {
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: var(--modal-blackout);
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  cursor: pointer;
+  z-index: 1;
+  overflow-y: auto;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.4s, visibility 0.4s;
+}
+
+.modal-window {
+  position: absolute;
+  width: 21.875rem;
+  height: 30.93rem;
+  top: calc(50% - 15.625rem);
+  left: calc(50% - 10.93rem);
+  background-color: var(--base-strong-up);
+  cursor: default;
+  padding: 1.75rem;
+  color: var(--base-weak);
+  font-size: 1rem;
+  transform: scale(0);
+  transition: transform 0.4s;
+}
+
+.modal-background.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.modal-background.active .modal-window {
+  transform: scale(1);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--faint-strong);
+  margin-bottom: 1rem;
+}
+
+.modal-header-title {
+  margin: 0;
+}
+
+.modal-cross:hover {
+  cursor: pointer;
+  transition: 0.3s all;
+  transform: rotate(90deg);
+}
+
+.modal-footer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-btn {
+  height: 4rem;
+  padding: 1.5rem;
+  box-shadow: none;
+}
+
+.modal-btn:active {
+  box-shadow: none;
+}
