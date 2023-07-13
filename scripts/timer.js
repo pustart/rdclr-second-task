@@ -59,9 +59,11 @@ export default class Timer {
 
   resetTimer() {
     this.pauseTimer();
+    this._currentBreakType = TimerState.POMODORO;
     this._currentTime = this._pomodoro;
     this._pomodorosCompleted = 0;
     this.#updateTimerDisplay();
+    this.#updateTimerInfo();
   }
 
   switchToShortBreak() {
@@ -70,6 +72,7 @@ export default class Timer {
     this._currentBreakType = TimerState.SHORT_BREAK;
     this._currentTime = this._shortBreak;
     this.#updateTimerDisplay();
+    this.#updateTimerInfo();
   }
 
   switchToLongBreak() {
@@ -78,6 +81,26 @@ export default class Timer {
     this._currentBreakType = TimerState.LONG_BREAK;
     this._currentTime = this._longBreak;
     this.#updateTimerDisplay();
+    this.#updateTimerInfo();
+  }
+
+  #updateTimerInfo() {
+    const timerInfoSpan = document.querySelector(".timer-name");
+    let timerInfoText = "";
+    switch (this._currentBreakType) {
+      case TimerState.POMODORO:
+        timerInfoText = TimerState.POMODORO;
+        break;
+      case TimerState.SHORT_BREAK:
+        timerInfoText = TimerState.SHORT_BREAK;
+        break;
+      case TimerState.LONG_BREAK:
+        timerInfoText = TimerState.LONG_BREAK;
+        break;
+      default:
+        break;
+    }
+    timerInfoSpan.textContent = timerInfoText;
   }
 
   #updateTimer() {
