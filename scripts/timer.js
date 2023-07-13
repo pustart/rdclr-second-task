@@ -1,4 +1,6 @@
-export default class App {
+import { TimerState } from "./constants.js";
+
+export default class Timer {
   constructor(pomodoro, shortBreak, longBreak, breakInterval) {
     this._pomodoro = pomodoro * 60;
     this._shortBreak = shortBreak * 60;
@@ -8,6 +10,7 @@ export default class App {
     this._currentTime = this._pomodoro;
     this._pomodorosCompleted = 0;
     this._isTimerRunning = false;
+    this._currentBreakType = TimerState.POMODORO;
   }
 
   get pomodoro() {
@@ -56,9 +59,48 @@ export default class App {
 
   resetTimer() {
     this.pauseTimer();
+    this._currentBreakType = TimerState.POMODORO;
     this._currentTime = this._pomodoro;
     this._pomodorosCompleted = 0;
     this.#updateTimerDisplay();
+    this.#updateTimerInfo();
+  }
+
+  switchToShortBreak() {
+    this._isTimerRunning = false;
+    this.pauseTimer();
+    this._currentBreakType = TimerState.SHORT_BREAK;
+    this._currentTime = this._shortBreak;
+    this.#updateTimerDisplay();
+    this.#updateTimerInfo();
+  }
+
+  switchToLongBreak() {
+    this._isTimerRunning = false;
+    this.pauseTimer();
+    this._currentBreakType = TimerState.LONG_BREAK;
+    this._currentTime = this._longBreak;
+    this.#updateTimerDisplay();
+    this.#updateTimerInfo();
+  }
+
+  #updateTimerInfo() {
+    const timerInfoSpan = document.querySelector(".timer-name");
+    let timerInfoText = "";
+    switch (this._currentBreakType) {
+      case TimerState.POMODORO:
+        timerInfoText = TimerState.POMODORO;
+        break;
+      case TimerState.SHORT_BREAK:
+        timerInfoText = TimerState.SHORT_BREAK;
+        break;
+      case TimerState.LONG_BREAK:
+        timerInfoText = TimerState.LONG_BREAK;
+        break;
+      default:
+        break;
+    }
+    timerInfoSpan.textContent = timerInfoText;
   }
 
   #updateTimer() {
