@@ -1,6 +1,6 @@
 export default class Modal {
   constructor(modalId) {
-    this._modalBackground = document.querySelector(`#${modalId}`);
+    this._modalBackground = document.getElementById(`${modalId}`);
     this._closeModalButtons = this._modalBackground.querySelectorAll('.close-modal-button');
     this.#initializeEventListeners();
   }
