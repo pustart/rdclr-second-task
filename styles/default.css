@@ -41,6 +41,17 @@ a {
   background-color: var(--accent-strong);
 }
 
+.outlined-btn {
+  background: transparent;
+  border: 2px solid var(--base-weak);
+  color: var(--base-weak);
+}
+
+.outlined-btn:hover {
+  background-color: var(--accent-strong);
+  color: var(--base-weak);
+}
+
 .number-input {
   background-color: transparent;
   border: none;

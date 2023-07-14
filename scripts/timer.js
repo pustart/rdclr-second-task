@@ -1,16 +1,17 @@
-import { TimerState } from "./constants.js";
+import { TimerState, SECS_IN_MINUTES } from "./constants.js";
 
 export default class Timer {
   constructor(pomodoro, shortBreak, longBreak, breakInterval) {
-    this._pomodoro = pomodoro * 60;
-    this._shortBreak = shortBreak * 60;
-    this._longBreak = longBreak * 60;
+    this._pomodoro = pomodoro * SECS_IN_MINUTES;
+    this._shortBreak = shortBreak * SECS_IN_MINUTES;
+    this._longBreak = longBreak * SECS_IN_MINUTES;
     this._breakInterval = breakInterval;
     this._timerInterval = null;
     this._currentTime = this._pomodoro;
     this._pomodorosCompleted = 0;
     this._isTimerRunning = false;
     this._currentBreakType = TimerState.POMODORO;
+    this.#updateTimerDisplay();
   }
 
   get pomodoro() {
@@ -18,7 +19,7 @@ export default class Timer {
   }
 
   set pomodoro(value) {
-    this._pomodoro = value * 60;
+    this._pomodoro = value * SECS_IN_MINUTES;
   }
 
   get shortBreak() {
@@ -26,7 +27,7 @@ export default class Timer {
   }
 
   set shortBreak(value) {
-    this._shortBreak = value * 60;
+    this._shortBreak = value * SECS_IN_MINUTES;
   }
 
   get longBreak() {
@@ -34,7 +35,7 @@ export default class Timer {
   }
 
   set longBreak(value) {
-    this._longBreak = value * 60;
+    this._longBreak = value * SECS_IN_MINUTES;
   }
 
   get breakInterval() {
@@ -110,21 +111,37 @@ export default class Timer {
     } else {
       clearInterval(this._timerInterval);
       this._isTimerRunning = false;
-      this._pomodorosCompleted++;
+      if (this._currentBreakType === TimerState.POMODORO) {
+        this._pomodorosCompleted++;
+      }
+      console.log(this._pomodorosCompleted);
 
       if (this._pomodorosCompleted % this._breakInterval === 0) {
-        this._currentTime = this._longBreak;
+        if (this._currentBreakType === TimerState.POMODORO) {
+          this._currentBreakType = TimerState.LONG_BREAK;
+          this._currentTime = this._longBreak;
+        } else {
+          this._currentBreakType = TimerState.POMODORO;
+          this._currentTime = this._pomodoro;
+        }
       } else {
-        this._currentTime = this._shortBreak;
+        if (this._currentBreakType === TimerState.POMODORO) {
+          this._currentBreakType = TimerState.SHORT_BREAK;
+          this._currentTime = this._shortBreak;
+        } else {
+          this._currentBreakType = TimerState.POMODORO;
+          this._currentTime = this._pomodoro;
+        }
       }
 
+      this.#updateTimerInfo();
       this.#updateTimerDisplay();
     }
   }
 
   #updateTimerDisplay() {
-    const minutes = Math.floor(this._currentTime / 60);
-    const seconds = this._currentTime % 60;
+    const minutes = Math.floor(this._currentTime / SECS_IN_MINUTES);
+    const seconds = this._currentTime % SECS_IN_MINUTES;
     const timeDisplay = `${this.#padTime(minutes)}:${this.#padTime(seconds)}`;
     document.querySelector('.time').textContent = timeDisplay;
   }
